@@ -6,18 +6,16 @@ const Feature = () => {
       <Grid
         container
         sx={{
-          margin: "20px !important",
-          width: "380px!important",
-          overflow: "hidden",
+          margin: "0 20px 20px 0 !important",
         }}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        spacing={{ xs: 2 }}
+        width={"430px!important"}
       >
-        {Array(20)
+        {Array(16)
           .fill()
           .map((_, index) => (
             <Grid
+              item
               key={index}
               xs={3}
               sx={{ marginTop: "10px", width: "fix-content" }}

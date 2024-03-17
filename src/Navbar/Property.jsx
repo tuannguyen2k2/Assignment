@@ -44,16 +44,13 @@ const Property = () => {
         container
         sx={{
           margin: "16px 20px 20px 50px !important",
-          width: "730px!important",
         }}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
+        width={"730px"}
       >
         {Array(20)
           .fill()
           .map((_, index) => (
-            <Grid key={index} xs={3} sx={{ marginTop: "10px" }}>
+            <Grid item key={index} xs={3}>
               <Button
                 sx={{
                   display: "flex",
@@ -67,6 +64,7 @@ const Property = () => {
                   fontSize: "14px",
                   border: "1px solid rgb(224, 224, 224)",
                   borderRadius: "20px",
+                  margin: "4px 0",
                   "&:hover": {
                     backgroundColor: "rgb(161, 168, 164)",
                   },

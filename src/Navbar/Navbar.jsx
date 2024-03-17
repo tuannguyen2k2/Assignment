@@ -1,8 +1,10 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { Box, Button, Paper, Popover } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { useState } from "react";
-import Property from "./Property";
+import PopoverField from "../components/PopoverField";
 import { category } from "./data";
+import { useSelector } from "react-redux";
+import { priceSelector } from "../store/selector";
 const Navbar = () => {
   const [buttonActive, setButtonActive] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -15,6 +17,7 @@ const Navbar = () => {
     setButtonActive(null);
     setAnchorEl(null);
   };
+  const price = useSelector(priceSelector);
 
   const open = Boolean(anchorEl);
   const id = open ? "my-popover" : undefined;
@@ -58,31 +61,31 @@ const Navbar = () => {
                 "&:focus": {
                   outline: "none",
                   boxShadow:
-                    "rgba(46, 41, 51, 0.08) 0px 2px 4px, rgba(71, 63, 79, 0.16) 0px 5px 10px",
+                    buttonActive === item.label
+                      ? "rgba(46, 41, 51, 0.08) 0px 2px 4px, rgba(71, 63, 79, 0.16) 0px 5px 10px"
+                      : "none",
                 },
               }}
             >
               {item.icon}
-              {item.label}
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  width: item.label == "Price" ? "80px" : "100%",
+                }}
+              >
+                {price && item.label == "Price" ? price : item.label}
+              </Typography>
               <ArrowDropDownIcon />
             </Button>
-            <Popover
+            <PopoverField
               id={id}
-              open={open}
+              open={buttonActive === item.label}
               anchorEl={anchorEl}
               onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              sx={{ bgcolor: "transparent" }}
             >
-              <Property />
-            </Popover>
+              {item.popover}
+            </PopoverField>
           </Box>
         ))}
       </Paper>
